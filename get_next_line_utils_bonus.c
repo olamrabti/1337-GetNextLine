@@ -1,21 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line_utils.c                              :+:      :+:    :+:   */
+/*   get_next_line_utils_bonus.c                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: olamrabt <olamrabt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/12/21 13:50:25 by olamrabt          #+#    #+#             */
-/*   Updated: 2023/12/21 15:04:42 by olamrabt         ###   ########.fr       */
+/*   Created: 2023/12/21 15:24:02 by olamrabt          #+#    #+#             */
+/*   Updated: 2023/12/21 15:25:32 by olamrabt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "get_next_line_bonus.h"
 
 void	ft_free(char *str)
 {
-	free(str);
-	str = NULL;
+	if (str)
+	{
+		free(str);
+		str = NULL;
+	}
 }
 
 void	*ft_memmove(void *s1, void *s2, size_t n)

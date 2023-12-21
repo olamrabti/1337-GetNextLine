@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.c                                    :+:      :+:    :+:   */
+/*   get_next_line_bonus.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: olamrabt <olamrabt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/12/07 13:30:06 by olamrabt          #+#    #+#             */
-/*   Updated: 2023/12/21 15:02:51 by olamrabt         ###   ########.fr       */
+/*   Created: 2023/12/21 14:33:51 by olamrabt          #+#    #+#             */
+/*   Updated: 2023/12/21 14:59:35 by olamrabt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "get_next_line_bonus.h"
 
 char	*ft_fill_stock(int fd, char *stock)
 {
@@ -54,7 +54,7 @@ char	*ft_getline(char *stock)
 	else
 		line = malloc(sizeof(char) * (i + 2));
 	if (!line)
-		return (NULL);
+		return (ft_free(stock), NULL);
 	while (j < i)
 	{
 		line[j] = stock[j];
@@ -90,16 +90,16 @@ char	*ft_updatestock(char *str, size_t i)
 
 char	*get_next_line(int fd)
 {
-	static char	*stock;
+	static char	*stock[OPEN_MAX];
 	char		*line;
 
 	line = NULL;
-	stock = ft_fill_stock(fd, stock);
-	if (!stock)
+	stock[fd] = ft_fill_stock(fd, stock[fd]);
+	if (!stock[fd])
 		return (NULL);
-	line = ft_getline(stock);
+	line = ft_getline(stock[fd]);
 	if (!line)
-		return (ft_free(stock), NULL);
-	stock = ft_updatestock(stock, ft_strlen(line));
+		return (ft_free(stock[fd]), NULL);
+	stock[fd] = ft_updatestock(stock[fd], ft_strlen(line));
 	return (line);
 }
